@@ -5,16 +5,16 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html">
-                            <img src="img/logo.png" alt="">
-                        </a>
+                        <router-link :to="{'name':'home'}">
+                            <img src="../assets/img/logo.png" alt="">
+                        </router-link>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Homepage</a></li>
+                                <li class="active"><router-link :to="{'name':'home'}" active-class="active">Homepage</router-link></li>
                                 <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Categories</a></li>
@@ -25,7 +25,7 @@
                                         <li><a href="./login.html">Login</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
+                                <li><router-link :to="{'name':'blog'}">Our Blog</router-link></li>
                                 <li><a href="#">Contacts</a></li>
                             </ul>
                         </nav>

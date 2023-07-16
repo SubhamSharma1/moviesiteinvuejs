@@ -1,17 +1,18 @@
 <template>
   <Layout>
-<h3>THis is in between Layout..</h3>
+    <router-view></router-view>
     </Layout>
 
 </template>
 
 <script>
 import Layout from './layout/Layout.vue';
-
+import Home from './views/Home.vue';
 export default {
 
   components:{
-    Layout
+    Layout,
+    Home
   }
 }
 </script>
