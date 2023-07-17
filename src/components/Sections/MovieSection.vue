@@ -1,18 +1,19 @@
 <template>
     <!-- Product Section Begin -->
-
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8" v-for="movie in popularMovies" :key="movie.id">
-                    <div class="trending__product">
-                        
-                        <SectionHeader :title="movie.name" />
+                <div class="col-lg-8" >
+                    <div class="trending__product" v-if="!loading">
+                        <SectionHeader title="Popular Movies" />
                         <div class="row">
-                            <SingleMovieVue v-for="movies in movie.list" :key="movies.id" :movies="movies" />
+                            <SingleMovieVue v-for="movies in popularMovies" :key="movies.id" :movies="movies" :genres="getMovieGenres(genres,movies.genre_ids)" />
                         </div>
                     </div>
+                    <Loader v-else/>
+                    <Pagination/>
                 </div>
+                
                 <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="product__sidebar">
                         <div class="product__sidebar__view">
@@ -127,17 +128,27 @@ import { onBeforeMount, ref } from 'vue';
 import SectionHeader from '../Units/SectionHeader.vue';
 import SingleMovieVue from '../Units/SingleMovie.vue';
 import getPopularMovies from './Composable/getPopularMovies';
-
+import Loader from '../Units/Loader.vue';
+import Pagination from '../Units/Pagination.vue';
+import getMovieGenres from './Composable/getMovieGenres';
+import getGenres from './Composable/getGenres';
 export default {
 
         setup(){
             const { popularMovies, loading, loadPopularMovies } = getPopularMovies();
-           
+           const {genres,loadGenres}=getGenres()
+          
             onBeforeMount(() => {
                 loadPopularMovies();
+                loadGenres();
+            
+               
             });
             return {
                 popularMovies,
+                loading,
+                genres,
+                getMovieGenres
             }
         },
 
@@ -146,7 +157,10 @@ export default {
 
     components: {
         SectionHeader,
-        SingleMovieVue
+        SingleMovieVue,
+        Loader,
+Pagination
+
 
     }
 }
